@@ -7,8 +7,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { Form, Field, ErrorMessage } from "vee-validate";
+import { defineComponent } from 'vue';
+import { Form, Field, ErrorMessage } from 'vee-validate';
+
+import * as Yup from 'yup';
+
+Yup.setLocale({
+  mixed: {
+    required: '必須入力項目です',
+  },
+  string: {
+    email: '形式が違います',
+  },
+});
 
 export default defineComponent({
   components: {
@@ -19,19 +30,7 @@ export default defineComponent({
   setup() {
     const onSubmit = (values: any): void => console.log(values);
 
-    const validateEmail = (value: string): string | true => {
-      if (!value) {
-        return "This field is required.";
-      }
-
-      // if the field is not a valid email
-      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-      if (!regex.test(value)) {
-        return "This field must be a valid email";
-      }
-
-      return true;
-    };
+    const validateEmail = Yup.string().email().required();
     return { onSubmit, validateEmail };
   },
 });
