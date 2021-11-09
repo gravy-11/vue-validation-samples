@@ -3,23 +3,23 @@ import {
   createWebHistory,
   RouteRecordRaw,
   RouterView,
-} from "vue-router";
-import Home from "../views/Home.vue";
-import UserNew from "../views/UserNew.vue";
+} from 'vue-router';
+import Home from '../views/Home.vue';
+import UserNew from '../views/UserNew.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     component: Home,
   },
   {
-    path: "/user",
+    path: '/user',
     component: RouterView,
     children: [
       {
-        path: "new",
-        name: "UserNew",
+        path: 'new',
+        name: 'UserNew',
         component: UserNew,
       },
     ],
