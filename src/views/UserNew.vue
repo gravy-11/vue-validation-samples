@@ -1,14 +1,14 @@
 <template>
-  <Form @submit="onSubmit">
-    <Field type="email" name="email" :rules="validateEmail" />
-    <ErrorMessage name="email" />
-    <button submit>Add User</button>
-  </Form>
+  <div>
+    <input type="email" name="email" v-model="email" />
+    <span>{{ emailError }}</span>
+    <button @click="onSubmit">Add User</button>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Form, Field, ErrorMessage } from 'vee-validate';
+import { useField, useForm } from 'vee-validate';
 
 import * as Yup from 'yup';
 
@@ -22,16 +22,18 @@ Yup.setLocale({
 });
 
 export default defineComponent({
-  components: {
-    Form,
-    Field,
-    ErrorMessage,
-  },
   setup() {
-    const onSubmit = (values: any): void => console.log(values);
+    const { handleSubmit } = useForm();
+    const onSubmit = handleSubmit((values) => console.log(values));
 
     const validateEmail = Yup.string().email().required();
-    return { onSubmit, validateEmail };
+
+    const { value: email, errorMessage: emailError } = useField(
+      'email',
+      validateEmail
+    );
+
+    return { onSubmit, emailError, email };
   },
 });
 </script>
