@@ -18,4 +18,9 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/explicit-module-boundary-types': 0,
   },
+  globals: {
+    defineProps: 'readonly',
+    withDefaults: 'readonly',
+    defineEmits: 'readonly',
+  },
 };

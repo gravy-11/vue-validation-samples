@@ -4,24 +4,23 @@
   </button>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue';
+<script lang="ts" setup>
+import { computed } from 'vue';
 
-export default defineComponent({
-  props: {
-    size: {
-      type: String as PropType<'md' | 'sm' | 'xs'>,
-      default: 'md',
-    },
-  },
-  emits: ['click'],
-  setup(props) {
-    const sizeClass = computed(() => `${props.size}-btn`);
-    console.log('hi');
+const props = withDefaults(
+  defineProps<{
+    size?: 'md' | 'sm' | 'xs';
+  }>(),
+  {
+    size: 'md',
+  }
+);
 
-    return { sizeClass };
-  },
-});
+defineEmits<{
+  (e: 'click'): void;
+}>();
+
+const sizeClass = computed(() => `${props.size}-btn`);
 </script>
 
 <style lang="scss" scoped>

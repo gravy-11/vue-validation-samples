@@ -11,39 +11,16 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from 'vue';
+<script lang="ts" setup>
 import { Field, ErrorMessage } from 'vee-validate';
+import { Option } from '@/types';
 
-export type Option = {
-  label: string;
-  value: string | number;
-};
-
-export default defineComponent({
-  components: {
-    Field,
-    ErrorMessage,
-  },
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    options: {
-      type: Object as PropType<Option[]>,
-      required: true,
-    },
-    type: {
-      validator: (value: string) => ['radio', 'checkbox'].includes(value),
-      required: true,
-    },
-    label: String,
-  },
-  setup() {
-    return {};
-  },
-});
+defineProps<{
+  name: string;
+  options: Option[];
+  type: 'radio' | 'checkbox';
+  label?: string;
+}>();
 </script>
 
 <style lang="scss" scoped>

@@ -8,26 +8,12 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { Field, ErrorMessage } from 'vee-validate';
 
-export default defineComponent({
-  components: {
-    Field,
-    ErrorMessage,
-  },
-  props: {
-    name: {
-      type: String,
-      retuired: true,
-    },
-    label: String,
-  },
-  setup() {
-    return {};
-  },
-});
+defineProps<{
+  name: string;
+}>();
 </script>
 
 <style lang="scss" scoped>

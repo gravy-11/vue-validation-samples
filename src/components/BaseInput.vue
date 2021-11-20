@@ -6,23 +6,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { Field, ErrorMessage } from 'vee-validate';
 
-export default defineComponent({
-  components: {
-    Field,
-    ErrorMessage,
-  },
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    label: String,
-  },
-});
+defineProps<{
+  name: string;
+  label: string;
+}>();
 </script>
 
 <style scoped lang="scss">

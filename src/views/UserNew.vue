@@ -40,15 +40,15 @@
   </Form>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { Form } from 'vee-validate';
+<script lang="ts" setup>
+import { Form, SubmissionHandler } from 'vee-validate';
 import * as yup from 'yup';
 
 import BaseInput from '@/components/BaseInput.vue';
-import BaseRadios, { Option } from '@/components/BaseRadios.vue';
+import BaseRadios from '@/components/BaseRadios.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 import BaseButton from '@/components/BaseButton.vue';
+import { Option } from '@/types';
 
 type Fields = {
   name: string;
@@ -59,42 +59,30 @@ type Fields = {
   prefecture?: number;
 };
 
-export default defineComponent({
-  components: {
-    Form,
-    BaseInput,
-    BaseRadios,
-    BaseSelect,
-    BaseButton,
-  },
-  setup() {
-    const schema: yup.SchemaOf<Fields> = yup.object({
-      name: yup.string().required(),
-      email: yup.string().required(),
-      emailConfirmation: yup.string().required(),
-      sex: yup.mixed().oneOf(['man', 'woman']).required(),
-      interest: yup.array(),
-      prefecture: yup.number(),
-    });
-
-    const sexOptions: Option[] = [
-      { label: '男', value: 'man' },
-      { label: '女', value: 'woman' },
-    ];
-
-    const interestOptions: Option[] = [
-      { label: 'サッカー', value: 0 },
-      { label: '野球', value: 1 },
-    ];
-
-    const prefectures = ['神奈川', '東京', '大阪', '京都', '福岡'];
-
-    const onSubmit = (value: Fields) => {
-      console.log(value);
-    };
-    return { onSubmit, schema, sexOptions, interestOptions, prefectures };
-  },
+const schema: yup.SchemaOf<Fields> = yup.object({
+  name: yup.string().required(),
+  email: yup.string().required(),
+  emailConfirmation: yup.string().required(),
+  sex: yup.mixed().oneOf(['man', 'woman']).required(),
+  interest: yup.array(),
+  prefecture: yup.number(),
 });
+
+const sexOptions: Option[] = [
+  { label: '男', value: 'man' },
+  { label: '女', value: 'woman' },
+];
+
+const interestOptions: Option[] = [
+  { label: 'サッカー', value: 0 },
+  { label: '野球', value: 1 },
+];
+
+const prefectures = ['神奈川', '東京', '大阪', '京都', '福岡'];
+
+const onSubmit: SubmissionHandler = (values) => {
+  console.log(values);
+};
 </script>
 
 <style scoped lang="scss">
