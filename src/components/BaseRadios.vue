@@ -13,7 +13,6 @@
 
 <script lang="ts" setup>
 import { Field, ErrorMessage } from 'vee-validate';
-import { Option } from '@/types';
 
 defineProps<{
   name: string;

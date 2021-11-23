@@ -48,7 +48,6 @@ import BaseInput from '@/components/BaseInput.vue';
 import BaseRadios from '@/components/BaseRadios.vue';
 import BaseSelect from '@/components/BaseSelect.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import { Option } from '@/types';
 
 type Fields = {
   name: string;
@@ -80,7 +79,7 @@ const interestOptions: Option[] = [
 
 const prefectures = ['神奈川', '東京', '大阪', '京都', '福岡'];
 
-const onSubmit: SubmissionHandler = (values) => {
+const onSubmit = (values: Fields) => {
   console.log(values);
 };
 </script>
